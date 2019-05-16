@@ -2,12 +2,13 @@
   <div class="flip-box">
     <div class="flip-box-inner">
       <div class="flip-box-front">
-        <a href="#">
-          <img :src="img[cell.number]" alt srcset>
-        </a>
+       <span></span>
       </div>
       <div class="flip-box-back">
-        <span></span>
+         <a href="#">
+          <img v-if="this.$store.state.gameStatus == 'running'" :src="img[cell.number]" alt srcset>
+          <img v-else src="" alt="" style="background-color:black">
+        </a>
       </div>
     </div>
   </div>
@@ -15,7 +16,7 @@
 
 <script>
 export default {
-    props : ['cell','img']
+    props : ['cell','img'],
 };
 </script>
 
@@ -64,7 +65,7 @@ span {
 
 /* Style the front side (fallback if image is missing) */
 .flip-box-front {
-  background-color: #bbb;
+  background-color: black;
   color: black;
 }
 
@@ -74,4 +75,5 @@ span {
   color: white;
   transform: rotateY(180deg);
 }
+
 </style>
