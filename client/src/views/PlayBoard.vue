@@ -7,7 +7,8 @@
           <div>
             <h5 class="mt-4">Memorize the picture below!</h5>
 
-            <button @click.prevent="shuffle" class="btn-sm btn-dark my-2">shuffle</button>
+            <button @click.prevent="shuffle" class="btn-sm btn-dark my-2 mx-2">shuffle</button>
+            <button @click.prevent="changeGameStatus('running')" class="btn-sm btn-dark my-2 mx-2">Start Game</button>
             <transition-group name="cell" tag="div" class="container-wrap m-0 p-0">
               <Board v-bind:cell="cell" v-bind:img="img" v-for="cell in cells" :key="cell.id" class="cell"></Board> 
             </transition-group>
@@ -56,16 +57,17 @@ export default {
           id: index,
           number: (index % 16) + 1
         };
-      })
-
+      }),
+      role : localStorage.getItem('role')
     }
   },
   methods: {
     shuffle: function() {
       this.cells = _.shuffle(this.cells);
+      this.$store.commit('setGameStatus', '')
     },
-    computed: {
-      
+    changeGameStatus(value) {
+      this.$store.commit('setGameStatus', value)
     },
   }
 };
