@@ -36,6 +36,9 @@ export default {
   props: {
     msg: String,
   },
+  created() {
+    this.$store.dispatch('getRoom')
+  }
 };
 </script>
 
