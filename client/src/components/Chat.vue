@@ -5,18 +5,17 @@
       <ul id="myList">
         <li v-for="chat in chatsss">
           <div class="container">
-        <div class="row" style="background-color:#B1C6E3; margin-top:10px;">
-            <div class="col-3" style="background-color:#A4DE70;padding-top:5px;padding-bottom:5px;">
-              <b>
-          {{chat.user}}
-
-              </b>
+            <div class="row" style="background-color:#B1C6E3; margin-top:10px;">
+              <div class="col-3"
+                style="background-color:#A4DE70;padding-top:5px;padding-bottom:5px;">
+                <b>
+                  {{chat.user}}
+                </b>
+              </div>
+              <div class="col-9" style="padding-top:5px;padding-bottom:5px;">
+                {{chat.message}}
+              </div>
             </div>
-            <div class="col-9" style="padding-top:5px;padding-bottom:5px;">
-           {{chat.message}}
-            </div>
-          </div>
-
           </div>
         </li>
       </ul>
@@ -49,53 +48,54 @@
     },
     methods: {
       sendChat() {
-        if(this.message !== ""){
+        if (this.message !== "") {
           var data = {
-          message: this.message,
-          room: this.room,
-          user: this.name,
-          time: new Date
-        }
-        db
-          .collection("chats")
-          .doc()
-          .set(data);
-        this.message = ''
+            message: this.message,
+            room: this.room,
+            user: this.name,
+            time: new Date
+          }
+          db
+            .collection("chats")
+            .doc()
+            .set(data);
+          this.message = ''
         }
       }
     },
-    watch:{
-      chatsss : () => {
-      var myList = document.getElementById('myList');
-      myList.innerHTML = '';
+    watch: {
+      chatsss: () => {
+        var myList = document.getElementById('myList');
+        myList.innerHTML = '';
       }
     },
     created() {
-    var chatTemp = [];
-    db
-    .collection("chats")
-    .where("room", "==", this.room)
-    .orderBy("time", "desc")
-    .onSnapshot(querySnapshot => {
-      querySnapshot.forEach(doc => {
-        chatTemp.push(doc.data());
-      });
-    });
-    this.chatsss = chatTemp
+      var chatTemp = [];
+      db
+        .collection("chats")
+        .where("room", "==", this.room)
+        .orderBy("time", "desc")
+        .onSnapshot(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            chatTemp.push(doc.data());
+          });
+        });
+      this.chatsss = chatTemp
+    }
   }
-  }
+
 </script>
 
 <style scoped>
-  chatComponents {
+  .chatComponents {
     position: fixed;
     overflow-y: scroll;
   }
-
   ul {
     list-style: none;
     height: 230px;
     overflow-y: auto;
     overflow-x: none;
   }
+
 </style>
