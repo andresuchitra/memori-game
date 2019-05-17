@@ -1,9 +1,11 @@
 /* eslint-disable no-param-reassign */
 import Vue from 'vue';
 import Vuex from 'vuex';
-import db from './fb';
+import db from './fb'
+
 
 Vue.use(Vuex);
+
 
 export default new Vuex.Store({
   state: {
@@ -35,14 +37,23 @@ export default new Vuex.Store({
         state.currentQuestion = 'QUESTIONS LIST EMPTY!';
       }
     },
-    setRoom(state, payload) {
-      state.room = payload;
-    },
     setCurrentQuestion(state, payload) {
       state.currentQuestion = payload;
     },
-    setPlayers(state, payload) {
-      state.players = payload;
+    setRoom(state, payload) {
+      state.room = payload
+    },
+    setMyName(state, payload) {
+      state.myName = payload
+    },
+    setMyScore(state,payload){
+      state.myScore = payload
+    },
+    setPlayers(state,payload){
+      state.players = payload
+    },
+    setMyDocId(state,payload){
+      state.myDocId = payload
     },
   },
   actions: {
@@ -131,6 +142,45 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err);
         });
+    },
+    addPlayerToRoom(context, payload) {
+      
+      db
+        .collection('room').doc(payload.room)
+        .get()
+        .then(function(docRef){
+          let players = {
+            ...docRef.data(), 
+            id : docRef.id
+          }
+          players.players.push({
+            name : payload.name,
+            score : 0,
+            winner : false
+          })
+          return players
+        })
+        .then((players)=> {
+          localStorage.setItem('playerName',payload.name)
+          
+          db
+            .collection('room').doc(payload.room)
+            .set(players)
+        })
+        .then(()=> {
+          db
+            .collection('room').doc(context.state.room)
+            .collection('players').doc(docRef.id)
+            .onSnapshot(function(doc) {
+              context.commit("setMyName",doc.data().name)
+              context.commit("setMyScore", doc.data().score)
+              context.dispatch("listenToPlayers")
+              context.dispatch("listenToRoom") 
+            })
+        })
+        .catch(function(error){
+          console.error('Error adding document', error);
+        })
     },
   },
 });
