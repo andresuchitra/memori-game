@@ -6,7 +6,7 @@
       </div>
       <div class="flip-box-back">
          <a href="#">
-          <img v-if="this.$store.state.gameStatus == 'running'" :src="img[cell.number]" alt srcset>
+          <img v-if="this.$store.state.room.gameStatus == 'running'" :src="img[cell.number]" alt srcset>
           <img v-else src="" alt="" style="background-color:black">
         </a>
       </div>
