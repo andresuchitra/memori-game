@@ -45,7 +45,7 @@ export default {
     .then((querySnapshot)=> {
     
       querySnapshot.forEach(doc => {
-         this.list.push(doc.data())
+         this.list.push({id: doc.id, ...doc.data()})
       })
     })
    },

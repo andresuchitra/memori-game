@@ -7,7 +7,7 @@
           <div>
             <h5 class="mt-4">Memorize the picture below!</h5>
 
-            <div v-if="role">
+            <div v-if="role == 'admin'">
               <button @click.prevent="shuffle" class="btn-sm btn-dark my-2 mx-2">shuffle</button>
               <button @click.prevent="changeGameStatus('running')" class="btn-sm btn-dark my-2 mx-2">Start Game</button>
               <button @click.prevent="$store.dispatch('restartGame')" class="btn-sm btn-danger my-2 ml-2">Restart</button>
@@ -91,7 +91,7 @@ export default {
       this.$store.commit('setGameStatus', '')
     },
     changeGameStatus(value) {
-      this.$store.commit('setGameStatus', value)
+      this.$store.dispatch('changeGameStatus', 'running');
     },
   }
 };

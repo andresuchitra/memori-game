@@ -170,5 +170,27 @@ export default new Vuex.Store({
           console.error('Error adding document', error);
         })
     },
+    changeGameStatus(context, newStatus) {
+      const docRef = db.doc(`room/${context.state.room.id}`);
+
+      docRef.get()
+        .then((doc) => {
+          if (doc.exists) {
+            docRef.update({ gameStatus: newStatus })
+              .then(() => {
+                console.log(`Status is successfully updated..${newStatus}`);
+                context.commit('setGameStatus', newStatus);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          } else {
+            console.log(`Room: ${context.state.room.id  } does not exist`);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   },
 });
