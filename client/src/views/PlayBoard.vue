@@ -85,7 +85,7 @@
   }
 
   #chat {
-    height: 35vh;
+    height: 50vh;
     background-color: white;
     color: black;
   }

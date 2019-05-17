@@ -67,7 +67,6 @@
         chatTemp.push(doc.data());
       });
     });
-    console.log('firebas=0000==', chatTemp)
     this.chatsss = chatTemp
   }
   }
@@ -81,7 +80,7 @@
 
   ul {
     list-style: none;
-    height: 140px;
+    height: 230px;
     overflow-y: auto;
     overflow-x: none;
   }
