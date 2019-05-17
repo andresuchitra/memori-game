@@ -85,7 +85,7 @@ export default new Vuex.Store({
     },
     getRoom(context, payload) {
       let room;
-      db.doc(`room/${payload}`).onSnapshot((doc) => {
+      db.doc('room/'+payload).onSnapshot((doc) => {
         const data = doc.data();
         // to change
         if (doc.exists) {

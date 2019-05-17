@@ -3,7 +3,7 @@
     <div class="row my-4 py-2">
       <div class="col-lg-4 col-md-3 col-sm-2">
         <h1>Room Page</h1>
-
+        <h6>{{list}}</h6>
         <label for>Room Name</label>
         <input v-model="roomName" type="text" class="form-control" placeholder="Enter room name">
         <button @click.prevent="createRoom" type="submit" class="btn btn-primary mt-3">Create Room</button>
@@ -22,6 +22,7 @@
 
   import RoomsCard from '@/components/RoomsCard.vue'
   import db from '../fb'
+import PlayBoardVue from './PlayBoard.vue';
 export default {
  name : 'roomPage',
  components : {
@@ -41,25 +42,13 @@ export default {
  },
  methods: {
    listRoom() {
-     db.collection('room').onSnapshot(querySnapshot => {
-       this.list = [];
-       querySnapshot.docs.forEach(el => {
-         let obj = {
-           id: el.id,
-           players: []
-         }
-         el.ref.collection('players').onSnapshot(snapshot => {
-           obj.players = [];
-           snapshot.docs.forEach(x => {
-             obj.players.push({
-               id : x.id,
-               ...x.data
-             });
-           });
-         });
-         this.list.push(obj)
-       });
-     });
+    db.collection('room').get()
+    .then((querySnapshot)=> {
+    
+      querySnapshot.forEach(doc => {
+         this.list.push(doc.data())
+      })
+    })
    },
    createRoom() {
      db.collection('room')
@@ -129,6 +118,8 @@ export default {
        name : playerName,
        room : roomId
      }
+     this.$store.commit('setUser', {name: playerName, score: 0, winner: false})
+     localStorage.setItem('playerName',playerName)
      this.$store.dispatch('addPlayerToRoom', payload)
    },
  },

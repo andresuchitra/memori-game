@@ -3,7 +3,7 @@
         <h4 class="mb-5">{{room.id}}</h4>
         <span>Players :</span>
         <ul>
-            <!-- <li v-for="(player, index) in room.players" :key="index">{{room}}</li> -->
+            <li v-for="(player, index) in room.players" :key="index">{{player.name}}</li>
         </ul>
         <div class="row align-items-center">
             <div class="col-5 text-center">
