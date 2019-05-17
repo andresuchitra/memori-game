@@ -66,7 +66,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('getRoom', 'Room 1')
+    this.$store.dispatch('getRoom', 'room 1')
     console.log(this.$store.state.room);
     this.$store.commit('setUser', localStorage.getItem('user'))
   },
