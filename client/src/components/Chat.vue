@@ -4,7 +4,20 @@
     <div style="background-color:#C4C4C4">
       <ul id="myList">
         <li v-for="chat in chatsss">
-          {{chat.user}} : {{chat.message}}
+          <div class="container">
+        <div class="row" style="background-color:#B1C6E3; margin-top:10px;">
+            <div class="col-3" style="background-color:#A4DE70;padding-top:5px;padding-bottom:5px;">
+              <b>
+          {{chat.user}}
+
+              </b>
+            </div>
+            <div class="col-9" style="padding-top:5px;padding-bottom:5px;">
+           {{chat.message}}
+            </div>
+          </div>
+
+          </div>
         </li>
       </ul>
     </div>
@@ -36,7 +49,8 @@
     },
     methods: {
       sendChat() {
-        var data = {
+        if(this.message !== ""){
+          var data = {
           message: this.message,
           room: this.room,
           user: this.name,
@@ -47,7 +61,7 @@
           .doc()
           .set(data);
         this.message = ''
-
+        }
       }
     },
     watch:{
