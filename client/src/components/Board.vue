@@ -1,5 +1,5 @@
 <template>
-  <div class="flip-box col-lg-3" @click="answer">
+  <div class="flip-box">
     <div class="flip-box-inner">
       <div class="flip-box-front">
        <span></span>
