@@ -7,8 +7,8 @@
           <div>
             <h5 class="mt-4">Memorize the picture below!</h5>
 
-            <div v-if="role == 'admin'">
               <button @click.prevent="shuffle" class="btn-sm btn-dark my-2 mx-2">shuffle</button>
+            <div v-if="role == 'admin'">
               <button @click.prevent="changeGameStatus('running')" class="btn-sm btn-dark my-2 mx-2">Start Game</button>
               <button @click.prevent="$store.dispatch('restartGame')" class="btn-sm btn-danger my-2 ml-2">Restart</button>
               <button @click.prevent="$store.dispatch('goToNextQuestion')" class="btn-sm btn-primary my-2 ml-2">Next Question</button>
