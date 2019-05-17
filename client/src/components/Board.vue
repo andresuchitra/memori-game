@@ -1,5 +1,5 @@
 <template>
-  <div class="flip-box">
+  <div class="flip-box col-lg-3">
     <div class="flip-box-inner">
       <div class="flip-box-front">
        <span></span>
@@ -36,7 +36,7 @@ span {
   background-color: transparent;
   width: 150px;
   height: 150px;
-  border: 1px solid #f1f1f1;
+  border: 1px solid black;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -72,7 +72,7 @@ span {
 /* Style the back side */
 .flip-box-back {
   background-color: black;
-  color: white;
+  color: black;
   transform: rotateY(180deg);
 }
 
