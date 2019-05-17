@@ -74,6 +74,7 @@ export default new Vuex.Store({
 
           roomDocRef.update({
             currentQuestion: nextQuestionIndex,
+            gameStatus: 'active',
           })
             .then(() => {
               context.commit('setNextQuestion', nextQuestionIndex);

@@ -92,6 +92,7 @@ export default {
   methods: {
     shuffle: function() {
       this.cells = _.shuffle(this.cells);
+      
     },
     changeGameStatus(value) {
       this.$store.dispatch('changeGameStatus', 'running');
