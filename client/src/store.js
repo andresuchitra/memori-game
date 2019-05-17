@@ -105,6 +105,7 @@ export default new Vuex.Store({
       })
         .then(() => {
           context.commit('setNextQuestion', 0);
+          context.dispatch('changeGameStatus', 'active')
         })
         .catch((error) => {
           console.error('Error updating document: ', error);
