@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+<<<<<<< HEAD
     "dotenv": "^8.0.0",
+=======
+>>>>>>> chats
     "firebase": "^6.0.2",
     "lodash": "^4.17.11",
     "firebase": "^6.0.2",

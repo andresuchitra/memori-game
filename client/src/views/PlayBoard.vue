@@ -14,7 +14,8 @@
               <button @click.prevent="$store.dispatch('goToNextQuestion')" class="btn-sm btn-primary my-2 ml-2">Next Question</button>
             </div>
             <transition-group name="cell" tag="div" class="container-wrap m-0 p-0">
-              <Board v-bind:cell="cell" v-bind:img="img" v-for="cell in cells" :key="cell.id" class="cell"></Board> 
+              <Board v-bind:cell="cell" v-bind:img="img" v-for="cell in cells" :key="cell.id"
+                class="cell"></Board>
             </transition-group>
           </div>
         </div>
@@ -24,26 +25,28 @@
           <h5>Question:</h5>
           <div>{{ $store.state.currentQuestion.question }}</div>
         </div>
-        <div class="row" id="chat">Chat Column</div>
+        <div class="row" id="chat">
+          <Chat></Chat>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import _ from 'lodash'
+  import Board from '@/components/Board.vue'
+  import Chat from '@/components/Chat.vue'
 
-import _ from 'lodash'
-import Board from '@/components/Board.vue'
-
-export default {
-  name: "PlayBoard",
-  components : {
-    Board
-  },
-  data() {
-    return {
-
-      img :['',
+  export default {
+    name: "PlayBoard",
+    components: {
+      Board,
+      Chat
+    },
+    data() {
+      return {
+        img: ['',
           'https://chanelmuslim.com/assets/ce5e821f/monumen-nasional-dari-garden-jadi-taman-bermain.jpg',
           'https://pajulahti.com/wp-content/uploads/2017/04/500x500.jpeg',
           'https://horrorfreaknews.com/wp-content/uploads/2017/07/Valak.jpg',
@@ -94,53 +97,61 @@ export default {
     changeGameStatus(value) {
       this.$store.dispatch('changeGameStatus', 'running');
     },
-  }
-};
+    methods: {
+      shuffle: function () {
+        this.cells = _.shuffle(this.cells);
+      },
+    }
+  };
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#question {
-  height: 35vh;
-  background-color: white;
-  color: black;
-}
+  #question {
+    height: 35vh;
+    background-color: white;
+    color: black;
+  }
 
-#chat {
-  height: 35vh;
-  background-color: white;
-  color: black;
-}
+  #chat {
+    height: 35vh;
+    background-color: white;
+    color: black;
+  }
 
-#board {
-  border: 1px solid white;
-}
+  #board {
+    border: 1px solid white;
+  }
 
-.cell {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 150px;
-  height: 150px;
-  border: 1px solid #aaa;
-  margin-right: -1px;
-  margin-bottom: -1px;
-}
-.cell:nth-child(3n) {
-  margin-right: 0;
-}
-.cell:nth-child(27n) {
-  margin-bottom: 0;
-}
-.cell-move {
-  transition: transform 1s;
-}
+  .cell {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border: 1px solid #aaa;
+    margin-right: -1px;
+    margin-bottom: -1px;
+  }
 
-.container-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  width: 600px;
-  margin-top: 10px;
-}
+  .cell:nth-child(3n) {
+    margin-right: 0;
+  }
+
+  .cell:nth-child(27n) {
+    margin-bottom: 0;
+  }
+
+  .cell-move {
+    transition: transform 1s;
+  }
+
+  .container-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px;
+    margin-top: 10px;
+  }
 
 </style>
