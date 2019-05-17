@@ -9,19 +9,19 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'playBoard',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/PlayBoard.vue'),
-    },
-    {
-      path: '/rooms',
-      name: 'room',
+      name: 'rooms',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/Room.vue'),
+    },
+    {
+      path: '/room/:id',
+      name: 'playboard',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/PlayBoard.vue'),
     },
   ],
 });

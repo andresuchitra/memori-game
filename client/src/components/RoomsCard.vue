@@ -11,6 +11,9 @@
             </div>
             <div class="col-6">
                 <button class="btn btn-danger mx-1" @click.prevent="addPlayer(room.id)">join</button>
+                <label for="">admin</label>
+                <input type="radio" value="admin" v-model="role">
+
             </div>
         </div>
     </div>
@@ -22,12 +25,14 @@ export default {
     props : ['room'],
     data() {
         return {
-            playerName : ''
+            playerName : '',
+            role: false
         }
     },
     methods: {
         addPlayer(roomId) {
             this.$emit('create-player', this.playerName, roomId )
+            localStorage.setItem('role', this.role)
         }
     },
 }

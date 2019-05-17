@@ -3,7 +3,6 @@
     <div class="row my-4 py-2">
       <div class="col-lg-4 col-md-3 col-sm-2">
         <h1>Room Page</h1>
-        <h6>{{list}}</h6>
         <label for>Room Name</label>
         <input v-model="roomName" type="text" class="form-control" placeholder="Enter room name">
         <button @click.prevent="createRoom" type="submit" class="btn btn-primary mt-3">Create Room</button>
@@ -120,7 +119,9 @@ export default {
      }
      this.$store.commit('setUser', {name: playerName, score: 0, winner: false})
      localStorage.setItem('playerName',playerName)
+     
      this.$store.dispatch('addPlayerToRoom', payload)
+     this.$router.push('/room/'+ roomId)
    },
  },
 };

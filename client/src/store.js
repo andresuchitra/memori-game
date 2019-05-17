@@ -162,21 +162,9 @@ export default new Vuex.Store({
         })
         .then((players)=> {
           localStorage.setItem('playerName',payload.name)
-          
           db
             .collection('room').doc(payload.room)
             .set(players)
-        })
-        .then(()=> {
-          db
-            .collection('room').doc(context.state.room)
-            .collection('players').doc(docRef.id)
-            .onSnapshot(function(doc) {
-              context.commit("setMyName",doc.data().name)
-              context.commit("setMyScore", doc.data().score)
-              context.dispatch("listenToPlayers")
-              context.dispatch("listenToRoom") 
-            })
         })
         .catch(function(error){
           console.error('Error adding document', error);
