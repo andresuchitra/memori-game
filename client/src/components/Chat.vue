@@ -9,7 +9,7 @@
               <div class="col-3"
                 style="background-color:#A4DE70;padding-top:5px;padding-bottom:5px;">
                 <b>
-                  {{chat.user}}
+                  {{username}}
                 </b>
               </div>
               <div class="col-9" style="padding-top:5px;padding-bottom:5px;">
@@ -42,8 +42,11 @@
       return {
         chatsss: [],
         message: "",
-        name: "Rudy",
-        room: "123"
+      }
+    },
+    computed: {
+      username() {
+        return this.$store.state.user.name;
       }
     },
     methods: {
@@ -52,7 +55,7 @@
           var data = {
             message: this.message,
             room: this.room,
-            user: this.name,
+            user: username(),
             time: new Date
           }
           db
