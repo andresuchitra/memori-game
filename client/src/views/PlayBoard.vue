@@ -11,6 +11,7 @@
               <button @click.prevent="shuffle" class="btn-sm btn-dark my-2 mx-2">shuffle</button>
               <button @click.prevent="changeGameStatus('running')" class="btn-sm btn-dark my-2 mx-2">Start Game</button>
               <button @click.prevent="$store.dispatch('restartGame')" class="btn-sm btn-danger my-2 ml-2">Restart</button>
+              <button @click.prevent="$store.dispatch('goToNextQuestion')" class="btn-sm btn-primary my-2 ml-2">Next Question</button>
             </div>
             <transition-group name="cell" tag="div" class="container-wrap m-0 p-0">
               <Board v-bind:cell="cell" v-bind:img="img" v-for="cell in cells" :key="cell.id" class="cell"></Board> 
