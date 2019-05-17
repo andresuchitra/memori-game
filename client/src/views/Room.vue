@@ -102,7 +102,8 @@ export default {
              nextQuestion : false,
              question : 'Mana lambang Firebase?'
            },
-         ]
+         ],
+         shuffle : false
        })
        .then(()=> {
         console.log('new room created!');

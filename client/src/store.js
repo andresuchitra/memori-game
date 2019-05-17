@@ -15,8 +15,13 @@ export default new Vuex.Store({
     players: [],
     user: '',
     gameStatus: 'active',
+    shuffle : false,
+    myScore: 0,
   },
   mutations: {
+    setShuffle(state, payload) {
+      state.shuffle = payload
+    },
     setGameStatus(state, payload) {
       state.gameStatus = payload;
     },
@@ -132,6 +137,9 @@ export default new Vuex.Store({
             docRef.update({ players })
               .then(() => {
                 console.log(`Player ${updatedPlayer.name} score is successfully updated..`);
+                let currentPlayer = context.state.room.players.find(x => x.name === context.state.user.name)
+                console.log(currentPlayer);
+                context.commit('setMyScore', currentPlayer.score)
               })
               .catch((err) => {
                 console.log(err);

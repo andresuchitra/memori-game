@@ -1,5 +1,5 @@
 <template>
-  <div class="flip-box">
+  <div class="flip-box" @click="answer">
     <div class="flip-box-inner">
       <div class="flip-box-front">
        <span></span>
@@ -46,7 +46,7 @@ export default {
           this.sendAnswer(0)
         }
 
-        this.$store.dispatch('goToNextQuestion')
+        //this.$store.dispatch('goToNextQuestion')
       },
     },
 };

@@ -19,10 +19,13 @@
           </div>
         </div>
       </div>
-      <div class="col-4 ml-5 mt-5">
+      <div class="col-4 ml-5 mt-2">
+        <div class="row mb-3">
+          <h3> Score : {{$store.state.myScore}} </h3>
+        </div>
         <div class="row mb-4 flex-column" id="question">
-          <h5>Question:</h5>
-          <div>{{ $store.state.currentQuestion.question }}</div>
+          <h5 class="text-center mt-5">Question:</h5>
+          <div class="text-center">{{ $store.state.currentQuestion.question }}</div>
         </div>
         <div class="row" id="chat">Chat Column</div>
       </div>
@@ -89,7 +92,6 @@ export default {
   methods: {
     shuffle: function() {
       this.cells = _.shuffle(this.cells);
-      this.$store.commit('setGameStatus', '')
     },
     changeGameStatus(value) {
       this.$store.dispatch('changeGameStatus', 'running');
