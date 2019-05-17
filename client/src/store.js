@@ -126,8 +126,6 @@ export default new Vuex.Store({
           if (doc.exists) {
             // eslint-disable-next-line prefer-destructuring
             players = doc.data().players;
-            
-            console.log(players);
 
             players.forEach((x) => {
               if (x.name === updatedPlayer.name) {
@@ -138,9 +136,7 @@ export default new Vuex.Store({
             docRef.update({ players })
               .then(() => {
                 console.log(`Player ${updatedPlayer.name} score is successfully updated..`);
-                let currentPlayer = context.state.room.players.find(x => x.name === context.state.user.name)
-                console.log(currentPlayer);
-                context.commit('setMyScore', currentPlayer.score)
+                context.commit('setMyScore', updatedPlayer.score)
               })
               .catch((err) => {
                 console.log(err);

@@ -41,9 +41,7 @@ export default {
  },
  methods: {
    listRoom() {
-    db.collection('room').get()
-    .then((querySnapshot)=> {
-    
+    db.collection('room').onSnapshot((querySnapshot) => {
       querySnapshot.forEach(doc => {
          this.list.push({id: doc.id, ...doc.data()})
       })
