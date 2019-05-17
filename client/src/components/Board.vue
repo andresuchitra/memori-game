@@ -37,9 +37,10 @@ export default {
       answer() {
         let answerImg = this.$props.img[this.$props.cell.number];
         
-        if(this.$store.state.currentQuestion && (answerImg === this.$store.state.currentQuestion.answer)) {
+        if(this.$store.state.currentQuestion && (answerImg === this.$store.state.currentQuestion.answer) && this.$store.state.room.gameStatus === 'running') {
           console.log('correct!');
           this.sendAnswer(1)
+          this.$store.dispatch('changeGameStatus', 'active')
         }
         else {
           console.log('wrong!');
