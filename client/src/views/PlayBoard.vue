@@ -21,10 +21,14 @@
         </div>
       </div>
       <div class="col-4 ml-5 mt-5">
+<<<<<<< HEAD
         <div class="row mb-4 flex-column" id="question">
           <h5>Question:</h5>
           <div>{{ $store.state.currentQuestion.question }}</div>
         </div>
+=======
+        <div class="row mb-4" id="question">Question Column</div>
+>>>>>>> 3a7248b09bb863f3b3663a17102a86e56ca7ba56
         <div class="row" id="chat">
           <Chat></Chat>
         </div>
@@ -62,6 +66,7 @@
           'https://lh3.googleusercontent.com/RAd8Wig1orzkjhjRqHeJ_1xnbcC_pxYL0jgLK0A_wTO7Axo9yD9jjNn1JSCRTzMwfvE',
           'https://pbs.twimg.com/profile_images/875996174305472512/upM71pVR.jpg',
           'https://bobandsuewilliams.com/images/thanos-eye-11.jpg',
+<<<<<<< HEAD
           'https://cdn-images-1.medium.com/max/1200/1*zpf20IEq4J80W-iTO3U8TA.png'],
       cells: Array.apply(null, { length: 16 }).map(function(_, index) {
         return {
@@ -96,6 +101,20 @@
     },
     changeGameStatus(value) {
       this.$store.dispatch('changeGameStatus', 'running');
+=======
+          'https://cdn-images-1.medium.com/max/1200/1*zpf20IEq4J80W-iTO3U8TA.png'
+        ],
+        cells: Array.apply(null, {
+          length: 16
+        }).map(function (_, index) {
+          return {
+            id: index,
+            number: (index % 16) + 1
+          };
+        })
+
+      }
+>>>>>>> 3a7248b09bb863f3b3663a17102a86e56ca7ba56
     },
     methods: {
       shuffle: function () {
@@ -113,6 +132,7 @@
     background-color: white;
     color: black;
   }
+<<<<<<< HEAD
 
   #chat {
     height: 50vh;
@@ -147,6 +167,42 @@
     transition: transform 1s;
   }
 
+=======
+
+  #chat {
+    height: 50vh;
+    background-color: white;
+    color: black;
+  }
+
+  #board {
+    border: 1px solid white;
+  }
+
+  .cell {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border: 1px solid #aaa;
+    margin-right: -1px;
+    margin-bottom: -1px;
+  }
+
+  .cell:nth-child(3n) {
+    margin-right: 0;
+  }
+
+  .cell:nth-child(27n) {
+    margin-bottom: 0;
+  }
+
+  .cell-move {
+    transition: transform 1s;
+  }
+
+>>>>>>> 3a7248b09bb863f3b3663a17102a86e56ca7ba56
   .container-wrap {
     display: flex;
     flex-wrap: wrap;
