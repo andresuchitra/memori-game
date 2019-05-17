@@ -19,22 +19,32 @@ export default {
     props : ['cell','img'],
     methods: {
       sendAnswer(answer) {
-        let player = this.$store.state.players.find(x => x.playerName === this.$store.state.user)
-        if(!player.score) {
-          player.score = 0
+        console.log(this.$store.state.user);
+        let player = this.$store.state.room.players.find(x => x.name === this.$store.state.user.name)
+
+        if(player) {
+          player.score += answer;
+          console.log('new score...', player);
+          this.$store.dispatch('updateScore', player)
         }
-        player.score += answer;
-        console.log('new score...', player.score);
+        else {
+          player = {
+            name: localStorage.getItem('playerName'),
+            score: 0,
+          }
+        }
       },
       answer() {
-        /* let answerImg = this.$props.img[this.$props.cell.number];
+        let answerImg = this.$props.img[this.$props.cell.number];
         
         if(this.$store.state.currentQuestion && (answerImg === this.$store.state.currentQuestion.answer)) {
+          console.log('correct!');
           this.sendAnswer(1)
         }
         else {
+          console.log('wrong!');
           this.sendAnswer(0)
-        } */
+        }
 
         this.$store.dispatch('goToNextQuestion')
       },

@@ -52,6 +52,7 @@ export default new Vuex.Store({
 
       roomDocRef.get()
         .then((doc) => {
+          console.log(doc);
           nextQuestionIndex = doc.data().currentQuestion + 1;
           console.log('next qindex..', nextQuestionIndex);
 
@@ -73,7 +74,7 @@ export default new Vuex.Store({
     },
     getRoom(context, payload) {
       let room;
-      db.doc('room/Room 1').onSnapshot((doc) => {
+      db.doc(`room/${payload}`).onSnapshot((doc) => {
         const data = doc.data();
         // to change
         if (doc.exists) {
@@ -96,6 +97,39 @@ export default new Vuex.Store({
         })
         .catch((error) => {
           console.error('Error updating document: ', error);
+        });
+    },
+    updateScore(context, updatedPlayer) {
+      let players;
+      const docRef = db.doc(`room/${context.state.room.id}`);
+
+      docRef.get()
+        .then((doc) => {
+          if (doc.exists) {
+            // eslint-disable-next-line prefer-destructuring
+            players = doc.data().players;
+            
+            console.log(players);
+
+            players.forEach((x) => {
+              if (x.name === updatedPlayer.name) {
+                x.score = updatedPlayer.score;
+              }
+            });
+
+            docRef.update({ players })
+              .then(() => {
+                console.log(`Player ${updatedPlayer.name} score is successfully updated..`);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          } else {
+            console.log(`Room: ${context.state.room.id  } does not exist`);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
   },
