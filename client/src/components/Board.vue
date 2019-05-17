@@ -1,5 +1,5 @@
 <template>
-  <div class="flip-box col-lg-3">
+  <div class="flip-box col-lg-3" @click="answer">
     <div class="flip-box-inner">
       <div class="flip-box-front">
        <span></span>
@@ -17,6 +17,28 @@
 <script>
 export default {
     props : ['cell','img'],
+    methods: {
+      sendAnswer(answer) {
+        let player = this.$store.state.players.find(x => x.playerName === this.$store.state.user)
+        if(!player.score) {
+          player.score = 0
+        }
+        player.score += answer;
+        console.log('new score...', player.score);
+      },
+      answer() {
+        /* let answerImg = this.$props.img[this.$props.cell.number];
+        
+        if(this.$store.state.currentQuestion && (answerImg === this.$store.state.currentQuestion.answer)) {
+          this.sendAnswer(1)
+        }
+        else {
+          this.sendAnswer(0)
+        } */
+
+        this.$store.dispatch('goToNextQuestion')
+      },
+    },
 };
 </script>
 

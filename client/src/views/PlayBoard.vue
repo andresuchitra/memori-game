@@ -9,6 +9,7 @@
 
             <button @click.prevent="shuffle" class="btn-sm btn-dark my-2 mx-2">shuffle</button>
             <button @click.prevent="changeGameStatus('running')" class="btn-sm btn-dark my-2 mx-2">Start Game</button>
+            <button @click.prevent="$store.dispatch('restartGame')" class="btn-sm btn-danger my-2 ml-2">Restart</button>
             <transition-group name="cell" tag="div" class="container-wrap m-0 p-0">
               <Board v-bind:cell="cell" v-bind:img="img" v-for="cell in cells" :key="cell.id" class="cell"></Board> 
             </transition-group>
@@ -16,7 +17,10 @@
         </div>
       </div>
       <div class="col-4 ml-5 mt-5">
-        <div class="row mb-4" id="question">Question Column</div>
+        <div class="row mb-4 flex-column" id="question">
+          <h5>Question:</h5>
+          <div>{{ $store.state.currentQuestion.question }}</div>
+        </div>
         <div class="row" id="chat">Chat Column</div>
       </div>
     </div>
@@ -37,7 +41,7 @@ export default {
     return {
       img :['',
           'https://chanelmuslim.com/assets/ce5e821f/monumen-nasional-dari-garden-jadi-taman-bermain.jpg',
-          'https://horrorfreaknews.com/wp-content/uploads/2017/07/Valak.jpg',
+          'https://pajulahti.com/wp-content/uploads/2017/04/500x500.jpeg',
           'https://horrorfreaknews.com/wp-content/uploads/2017/07/Valak.jpg',
           'https://horrorfreaknews.com/wp-content/uploads/2017/07/Valak.jpg',
           'https://horrorfreaknews.com/wp-content/uploads/2017/07/Valak.jpg',
@@ -59,6 +63,21 @@ export default {
         };
       }),
       role : localStorage.getItem('role')
+    }
+  },
+  mounted() {
+    this.$store.dispatch('getRoom', 'Room 1')
+    console.log(this.$store.state.room);
+    this.$store.commit('setUser', localStorage.getItem('user'))
+  },
+  computed: {
+    currentQuestion() {
+      if(this.$store.state.room) {
+        return this.$store.state.currentQuestion.question;
+      }
+      else {
+        return ''
+      }
     }
   },
   methods: {
